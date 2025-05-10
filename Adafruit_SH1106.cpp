@@ -197,7 +197,7 @@ void Adafruit_SH1106::begin(uint8_t vccstate, uint8_t i2caddr, bool reset) {
   else
   {
     // I2C Init
-    Wire.begin();
+    Wire1.begin();
 #ifdef __SAM3X8E__
     // Force 400 KHz I2C, rawr! (Uses pins 20, 21 for SDA, SCL)
     TWI1->TWI_CWGR = 0;
@@ -359,10 +359,10 @@ void Adafruit_SH1106::SH1106_command(uint8_t c) {
   {
     // I2C
     uint8_t control = 0x00;   // Co = 0, D/C = 0
-    Wire.beginTransmission(_i2caddr);
+    Wire1.beginTransmission(_i2caddr);
     WIRE_WRITE(control);
     WIRE_WRITE(c);
-    Wire.endTransmission();
+    Wire1.endTransmission();
   }
  
 }
@@ -475,10 +475,10 @@ void Adafruit_SH1106::SH1106_data(uint8_t c) {
   {
     // I2C
     uint8_t control = 0x40;   // Co = 0, D/C = 1
-    Wire.beginTransmission(_i2caddr);
+    Wire1.beginTransmission(_i2caddr);
     WIRE_WRITE(control);
     WIRE_WRITE(c);
-    Wire.endTransmission();
+    Wire1.endTransmission();
   }
   
 }
@@ -556,12 +556,12 @@ void Adafruit_SH1106::display(void) {
         SH1106_command(0x10 | (m_col >> 4));//set higher column address
 		
         for( j = 0; j < 8; j++){        
-			Wire.beginTransmission(_i2caddr);
-            Wire.write(0x40);
+			Wire1.beginTransmission(_i2caddr);
+            Wire1.write(0x40);
             for ( k = 0; k < width; k++, p++) {
-		Wire.write(buffer[p]);
+		Wire1.write(buffer[p]);
             }
-            Wire.endTransmission();
+            Wire1.endTransmission();
         	}
 	}
 	

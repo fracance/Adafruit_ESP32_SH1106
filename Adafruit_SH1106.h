@@ -28,10 +28,10 @@ However, SH1106 driver don't provide several functions such as scroll commands.
 
 #if ARDUINO >= 100
  #include "Arduino.h"
- #define WIRE_WRITE Wire.write
+ #define WIRE_WRITE Wire1.write
 #else
  #include "WProgram.h"
-  #define WIRE_WRITE Wire.send
+  #define WIRE_WRITE Wire1.send
 #endif
 
 #ifdef __SAM3X8E__
